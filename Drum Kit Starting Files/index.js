@@ -1,9 +1,11 @@
 // for mouse click
 
 for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
+  // if .addEventListener("type" , here if function will call this is callback function)
   document.querySelectorAll("button")[i].addEventListener("click", function () {
-    // if .addEventListener("type" , here if function will call this is callback function)
     let buttonInnerHtml = this.innerHTML; // "this" keyword will show the which button is pressed.
+
+    buttonAnimaton(buttonInnerHtml);
 
     switch (buttonInnerHtml) {
       case "w":
@@ -51,7 +53,9 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 // for keyboard click
 
 document.addEventListener("keydown", function (event) {
-  var keyPressed = event.key; // "event" keyword is show which key is pressed BY keyboard.
+  let keyPressed = event.key; // "event" keyword is show which key is pressed BY keyboard.
+
+  buttonAnimaton(keyPressed);
 
   switch (keyPressed) {
     case "w":
@@ -94,3 +98,13 @@ document.addEventListener("keydown", function (event) {
       break;
   }
 });
+
+function buttonAnimaton(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+
+  // Remove "pressed" class after 1 second (1000 milliseconds)
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
+}
